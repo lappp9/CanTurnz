@@ -12,7 +12,7 @@ public class ViewController: UIViewController, UIScrollViewDelegate {
     public var image = UIImage(named: "ginkakuji")!
     public let motionManager = CMMotionManager()
     public var zoomScale: Double = 0.0
-    
+
     public override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,7 +44,6 @@ public class ViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.center = self.view.center
         
-        
         motionManager.deviceMotionUpdateInterval = 0.01
         motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.currentQueue(), withHandler:{ deviceManager, error in
             let xRotationRate = deviceManager.rotationRate.x
@@ -59,9 +58,18 @@ public class ViewController: UIViewController, UIScrollViewDelegate {
     
     func panImageWithYRotation(yRotation: Double) {
         if self.zoomedIn {
-            self.scrollView.contentOffset = newContentOffset(yRotation)
+            UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState | UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.CurveEaseOut, animations: {
+                self.scrollView.contentOffset = self.newContentOffset(yRotation)
+            }, completion: nil)
         }
     }
+    
+//    static CGFloat kMovementSmoothing = 0.3f;
+//    [UIView animateWithDuration:kMovementSmoothing delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState| UIViewAnimationOptionAllowUserInteraction| UIViewAnimationOptionCurveEaseOut 
+//  animations:^{
+//    [self.panningScrollView setContentOffset:contentOffset animated:NO];
+//   } 
+//   completion:NULL];
     
     func newContentOffset(yRotation: Double) -> CGPoint {
         let lowerLimit = Double(0.0)
