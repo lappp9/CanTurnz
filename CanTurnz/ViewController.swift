@@ -36,7 +36,7 @@ public class ViewController: UIViewController, UIScrollViewDelegate {
         self.imageView.userInteractionEnabled = true
         smallImageSize = self.imageView.bounds.size
 
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapped")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapped:")
         self.imageView.addGestureRecognizer(tap)
         
         self.view.addSubview(scrollView)
@@ -57,19 +57,14 @@ public class ViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func panImageWithYRotation(yRotation: Double) {
-        if self.zoomedIn {
+        if self.zoomedIn && imageView.bounds.size.height == self.view.bounds.size.height {
             UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState | UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.CurveEaseOut, animations: {
                 self.scrollView.contentOffset = self.newContentOffset(yRotation)
             }, completion: nil)
+            
+//            self.scrollView.contentOffset = self.newContentOffset(yRotation)
         }
     }
-    
-//    static CGFloat kMovementSmoothing = 0.3f;
-//    [UIView animateWithDuration:kMovementSmoothing delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState| UIViewAnimationOptionAllowUserInteraction| UIViewAnimationOptionCurveEaseOut 
-//  animations:^{
-//    [self.panningScrollView setContentOffset:contentOffset animated:NO];
-//   } 
-//   completion:NULL];
     
     func newContentOffset(yRotation: Double) -> CGPoint {
         let lowerLimit = Double(0.0)
@@ -89,22 +84,22 @@ public class ViewController: UIViewController, UIScrollViewDelegate {
         return contentOffset
     }
     
-    public func tapped() {
+    public func tapped(tap: UITapGestureRecognizer) {
         if self.zoomedIn {
             self.animateImageViewToFullyVisible()
         } else {
-            self.animateImageViewToFullHeight()
+            self.animateImageViewToFullHeight(tap.locationInView(self.view))
         }
     }
     
-    func animateImageViewToFullHeight() {
+    func animateImageViewToFullHeight(tapLocation: CGPoint) {
         let sizeAnim = POPSpringAnimation(propertyNamed: kPOPLayerSize)
         sizeAnim.springBounciness = 2
         sizeAnim.springSpeed = 10
         sizeAnim.toValue = NSValue(CGSize: fullSizeImageSize)
         
         let contentOffsetAnim = POPBasicAnimation(propertyNamed: kPOPScrollViewContentOffset)
-        contentOffsetAnim.toValue = NSValue(CGPoint: CGPoint(x: proportionateWidthForImageAtScreenHeight(image)/2.0, y: 0))
+        contentOffsetAnim.toValue = NSValue(CGPoint: startingContentOffset(tapLocation.x))
 
         let imageCenter = POPBasicAnimation(propertyNamed: kPOPViewCenter)
         imageCenter.toValue = NSValue(CGPoint: CGPoint(x: scrollView.contentSize.width/2.0, y: UIScreen.mainScreen().bounds.height/2.0))
@@ -117,10 +112,19 @@ public class ViewController: UIViewController, UIScrollViewDelegate {
         self.zoomedIn = true
     }
     
+    func startingContentOffset(tapXPosition: CGFloat) -> CGPoint {
+        
+        let percentOfSmallImageWidth = tapXPosition/UIScreen.mainScreen().bounds.width
+        
+        let correspondingXDistanceForFullScreenImage = percentOfSmallImageWidth * (proportionateWidthForImageAtScreenHeight(image) - UIScreen.mainScreen().bounds.size.width)
+        
+        return CGPoint(x: correspondingXDistanceForFullScreenImage, y: 0)
+    }
+    
     func animateImageViewToFullyVisible() {
         let size = POPSpringAnimation(propertyNamed: kPOPViewSize)
         size.springBounciness = 1
-        size.springSpeed = 10
+        size.springSpeed = 25
         size.toValue = NSValue(CGSize: CGSize(width: UIScreen.mainScreen().bounds.size.width, height: proportionateHeightForImageAtScreenWidth(image)))
 
         let center = POPBasicAnimation(propertyNamed: kPOPViewCenter)
