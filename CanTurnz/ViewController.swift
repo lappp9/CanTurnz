@@ -105,13 +105,13 @@ public class ViewController: UIViewController, UIScrollViewDelegate {
         self.scrollView.pop_addAnimation(contentOffsetAnim, forKey: nil)
         self.imageView.pop_addAnimation(imageCenter, forKey: nil)
         
-        self.scrollView.scrollEnabled = true
+        self.scrollView.scrollEnabled = false
         self.zoomedIn = true
     }
     
     func animateImageViewToFullyVisible() {
         let size = POPSpringAnimation(propertyNamed: kPOPViewSize)
-        size.springBounciness = 2
+        size.springBounciness = 1
         size.springSpeed = 10
         size.toValue = NSValue(CGSize: CGSize(width: UIScreen.mainScreen().bounds.size.width, height: proportionateHeightForImageAtScreenWidth(image)))
 
