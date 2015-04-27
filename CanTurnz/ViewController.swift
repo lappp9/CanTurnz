@@ -61,15 +61,13 @@ public class ViewController: UIViewController, UIScrollViewDelegate {
             UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState | UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.CurveEaseOut, animations: {
                 self.scrollView.contentOffset = self.newContentOffset(yRotation)
             }, completion: nil)
-            
-//            self.scrollView.contentOffset = self.newContentOffset(yRotation)
         }
     }
     
     func newContentOffset(yRotation: Double) -> CGPoint {
         let lowerLimit = Double(0.0)
         let upperLimit = Double(proportionateWidthForImageAtScreenHeight(image) - UIScreen.mainScreen().bounds.size.width)
-        let rotationMult = Double(3)
+        let rotationMult = Double(5)
         
         var possibleXOffset = Double(scrollView.contentOffset.x) + ((yRotation * -1) * rotationMult * zoomScale)
         
