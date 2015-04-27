@@ -4,27 +4,48 @@ import CanTurnz
 import XCTest
 import Quick
 import Nimble
+import CoreMotion
 
 class CanTurnzSpec: QuickSpec {
     override func spec() {
         
         let vc = ViewController()
+        let image = UIImage(named: "ginkakuji")
+        
         beforeEach { () -> () in
             vc.viewDidLoad()
         }
         
-        describe("a View Controller") {
+        describe("a turnable Controller") {
+            
+            describe("the motion controls") {
+                it("should have a motion manager"){
+                    expect(vc.motionManager).toNot(beNil())
+                    expect(vc.motionManager).to(beAnInstanceOf(CMMotionManager))
+                }
+            }
+            
             it("should have an imageview") {
                 expect(vc.imageView).toNot(beNil())
                 expect(vc.imageView).to(beAnInstanceOf(UIImageView))
             }
             
-            it("should be the same width as the screen") {
-                expect(vc.imageView.bounds.size.width).to(equal(UIScreen.mainScreen().bounds.size.width))
+            it("should display the image view") {
+                expect(vc.scrollView.subviews).to(contain(vc.imageView))
             }
             
-            it("should display the image view") {
-                expect(vc.view.subviews).to(contain(vc.imageView))
+            describe("the scrollview", { () -> Void in
+                it("should have a be in the view"){
+                    expect(vc.view.subviews).to(contain(vc.scrollView))
+                }
+                
+                it("should be "){
+                    expect(vc.scrollView.frame).to(equal(vc.view.bounds))
+                }
+            })
+            
+            it("should be the same width as the screen") {
+                expect(vc.imageView.bounds.size.width).to(equal(UIScreen.mainScreen().bounds.size.width))
             }
             
             describe("the main image") {
@@ -32,8 +53,8 @@ class CanTurnzSpec: QuickSpec {
                     expect(vc.imageView.image).toNot(beNil())
                 }
                 
-                it("should be centered"){
-                    let expectedCenter = vc.view.center
+                it("should be centered inside the scrollview"){
+                    let expectedCenter = CGPoint(x: vc.scrollView.contentSize.width/2.0 + (vc.imageView.bounds.size.width/2.0), y: vc.view.bounds.size.height/2.0)
                     expect(vc.imageView.center).to(equal(expectedCenter))
                 }
             }
@@ -54,6 +75,9 @@ class CanTurnzSpec: QuickSpec {
                         
                         expect(vc.zoomedIn).to(beTrue())
                         expect(vc.imageView.bounds.size.height).toEventually(equal(UIScreen.mainScreen().bounds.size.height), timeout: 1.0, pollInterval: 0.1)
+                    }
+                    it("should make the scroll"){
+                        
                     }
                 }
                 
