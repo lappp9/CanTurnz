@@ -9,12 +9,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-
         let r: CGRect = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: UIScreen.mainScreen().bounds.size.height)
         
         self.window = UIWindow(frame: r)
         
-        self.window?.rootViewController = ViewController()
+        self.window?.rootViewController = MotionPanningViewController(image: UIImage(named: "ginkakuji")!)
+        
         self.window?.makeKeyAndVisible()
         
         return true

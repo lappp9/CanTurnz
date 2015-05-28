@@ -9,8 +9,9 @@ import CoreMotion
 class CanTurnzSpec: QuickSpec {
     override func spec() {
         
-        let vc = ViewController()
+        let vc = MotionPanningViewController(image: UIImage(named: "ginkakuji")!)
         let image = UIImage(named: "ginkakuji")
+        let tap = UITapGestureRecognizer(target: vc, action: "tapped:")
         let touchPoint = CGPoint(x: 100, y: 0)
         
         beforeEach { () -> () in
@@ -73,29 +74,29 @@ class CanTurnzSpec: QuickSpec {
                     expect(vc.imageView.gestureRecognizers).toNot(beEmpty())
                 }
                 
-//                context("when the image is not zoomed in"){
-//                    it("should change the height to the height of the phone"){
-//                        vc.zoomedIn = false
-//                        vc.tapped(touchPoint)
-//                        
-//                        expect(vc.zoomedIn).to(beTrue())
-//                        expect(vc.imageView.bounds.size.height).toEventually(equal(UIScreen.mainScreen().bounds.size.height), timeout: 1.0, pollInterval: 0.1)
-//                    }
-//                    it("should make the scroll"){
-//                        
-//                    }
-//                }
-//                
-//                context("when the image is zoomed in"){
-//                    it("should change the width to the width of the phone"){
-//                        vc.zoomedIn = true
-//                        vc.imageView.bounds = CGRect(x: 0, y: 0, width: 0, height: 0)
-//                        vc.tapped(touchPoint)
-//                        
-//                        expect(vc.zoomedIn).to(beFalse())
-//                        expect(vc.imageView.bounds.size.width).toEventually(equal(UIScreen.mainScreen().bounds.size.width), timeout: 1.0, pollInterval: 0.1)
-//                    }
-//                }
+                context("when the image is not zoomed in"){
+                    it("should change the height to the height of the phone"){
+                        vc.zoomedIn = false
+                        vc.tapped(tap)
+                        
+                        expect(vc.zoomedIn).to(beTrue())
+                        expect(vc.imageView.bounds.size.height).toEventually(equal(UIScreen.mainScreen().bounds.size.height), timeout: 1.0, pollInterval: 0.1)
+                    }
+                    it("should make the scroll"){
+                        
+                    }
+                }
+                
+                context("when the image is zoomed in"){
+                    it("should change the width to the width of the phone"){
+                        vc.zoomedIn = true
+                        vc.imageView.bounds = CGRect(x: 0, y: 0, width: 0, height: 0)
+                        vc.tapped(tap)
+                        
+                        expect(vc.zoomedIn).to(beFalse())
+                        expect(vc.imageView.bounds.size.width).toEventually(equal(UIScreen.mainScreen().bounds.size.width), timeout: 1.0, pollInterval: 0.1)
+                    }
+                }
             }
         }
     }

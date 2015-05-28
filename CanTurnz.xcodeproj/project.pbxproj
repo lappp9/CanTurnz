@@ -10,7 +10,7 @@
 		4F97D5C96F1E94471BB16108 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D43ED0550744BE92762DF24 /* libPods.a */; };
 		577A96E95467AC8AC489ECFD /* Pods_CanTurnzTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 446EB318960DCB977E4B9C8A /* Pods_CanTurnzTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		AE8C609E1AE8BA2B00DC881B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8C609D1AE8BA2B00DC881B /* AppDelegate.swift */; };
-		AE8C60A01AE8BA2B00DC881B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8C609F1AE8BA2B00DC881B /* ViewController.swift */; };
+		AE8C60A01AE8BA2B00DC881B /* MotionPanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8C609F1AE8BA2B00DC881B /* MotionPanningViewController.swift */; };
 		AE8C60A51AE8BA2B00DC881B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE8C60A41AE8BA2B00DC881B /* Images.xcassets */; };
 		AE8C60A81AE8BA2B00DC881B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8C60A61AE8BA2B00DC881B /* LaunchScreen.xib */; };
 		AE8C60B41AE8BA2B00DC881B /* CanTurnzTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8C60B31AE8BA2B00DC881B /* CanTurnzTests.swift */; };
@@ -34,7 +34,7 @@
 		AE8C60981AE8BA2B00DC881B /* CanTurnz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CanTurnz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE8C609C1AE8BA2B00DC881B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE8C609D1AE8BA2B00DC881B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AE8C609F1AE8BA2B00DC881B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AE8C609F1AE8BA2B00DC881B /* MotionPanningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionPanningViewController.swift; sourceTree = "<group>"; };
 		AE8C60A41AE8BA2B00DC881B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AE8C60A71AE8BA2B00DC881B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		AE8C60AD1AE8BA2B00DC881B /* CanTurnzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CanTurnzTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,7 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				AE8C609D1AE8BA2B00DC881B /* AppDelegate.swift */,
-				AE8C609F1AE8BA2B00DC881B /* ViewController.swift */,
+				AE8C609F1AE8BA2B00DC881B /* MotionPanningViewController.swift */,
 				AE8C60A41AE8BA2B00DC881B /* Images.xcassets */,
 				AE8C60A61AE8BA2B00DC881B /* LaunchScreen.xib */,
 				AE8C609B1AE8BA2B00DC881B /* Supporting Files */,
@@ -325,7 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE8C60A01AE8BA2B00DC881B /* ViewController.swift in Sources */,
+				AE8C60A01AE8BA2B00DC881B /* MotionPanningViewController.swift in Sources */,
 				AE8C609E1AE8BA2B00DC881B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

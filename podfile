@@ -5,6 +5,9 @@ pod 'pop', '~> 1.0'
 
 
 target 'CanTurnzTests' do
+
+  pod 'pop', '~> 1.0'
+
   use_frameworks!
   pod 'Quick'
   pod 'Nimble'
