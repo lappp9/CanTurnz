@@ -40,7 +40,7 @@ class CanTurnzSpec: QuickSpec {
                 expect(vc.scrollView.subviews).to(contain(vc.imageView))
             }
             
-            describe("the scrollview", { () -> Void in
+            describe("the scrollview", {
                 it("should have a be in the view"){
                     expect(vc.view.subviews).to(contain(vc.scrollView))
                 }
